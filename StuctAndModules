@@ -1,53 +1,34 @@
 #pragma warning(disable:4996)
 #include"S_class.h"
 #include"Student.h"
-#define N 30
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
 #include<string.h>
-void main()
+#define N 30
+void PrintAllStudents(Students arr[])
 {
-	int input;
-	int flag = 1;
-	Students arr[N];
-	while (flag)
+	int i;
+	printf("Here can u show all the Detsils of students:\n");
+	for (i = 0;i < N;i++)
 	{
-		printf("Hello Dear ,this is the main with any options:\n");
-		printf("---------------------\n");
-		printf("-> if u want to input a student details ,press 1.\n");
-		printf("---------------------\n");
-		printf("-> if u want to show a student details by name select ,press 2.\n");
-		printf("---------------------\n");
-		printf("-> if u want to show a students average ,press 3.\n");
-		printf("---------------------\n");
-		printf("-> if u want to show a student details ,press 4 (u need to input them before).\n");
-		printf("---------------------\n");
-		printf("-> if u want to show a students names who has grades average above any grade in his list ,press 5\n(u need to press 3 before)\n");
-		printf("---------------------\n");
-		printf("to exit from a program ,press 0\n");
-		printf("*****\n");
-		printf("what's u choose ,press here->");
-		scanf("%d", &input);
-		if (input == 0)
-			flag = 0;
-		if (input == 1)
-			StudentsDetails(&arr);
-		if (input == 2)
-			PrintByName(&arr);
-		if (input == 3)
-			AvgStudent(&arr);
-		if (input == 4)
-			PrintAllStudents(&arr);
-		if (input == 5)
-			PrintStudentsAvgAboveGrade(&arr);
-
-		    getchar();
-
+		printf("Student number-%d)%3s%3d%3d%3d%3d%3d%3d\n", i + 1, arr[i].name, arr[i].age, arr[i].first, arr[i].second, arr[i].third, arr[i].four, arr[i].five);
 
 	}
 
-	getchar();
+}
+
+void PrintStudentsAvgAboveGrade(Students arr[])
+{
+	int i;
+	printf("Here can u show names of students with grades average above any grade in his list:\n");
+	for (i = 0;i < N;i++)
+	{
+		if ((arr[i].avg > arr[i].first) || (arr[i].avg > arr[i].second) || (arr[i].avg > arr[i].third) || (arr[i].avg > arr[i].four) || (arr[i].avg > arr[i].five)) {
+
+			printf("student number - %d)%3s\n", i + 1, arr[i].name);
+		}
+	}
 
 
 }
