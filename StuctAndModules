@@ -1,0 +1,34 @@
+#pragma warning(disable:4996)
+#include"S_class.h"
+#include"Student.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+#define N 30
+void PrintAllStudents(Students arr[])
+{
+	int i;
+	printf("Here can u show all the Detsils of students:\n");
+	for (i = 0;i < N;i++)
+	{
+		printf("Student number-%d)%3s%3d%3d%3d%3d%3d%3d\n", i + 1, arr[i].name, arr[i].age, arr[i].first, arr[i].second, arr[i].third, arr[i].four, arr[i].five);
+
+	}
+
+}
+
+void PrintStudentsAvgAboveGrade(Students arr[])
+{
+	int i;
+	printf("Here can u show names of students with grades average above any grade in his list:\n");
+	for (i = 0;i < N;i++)
+	{
+		if ((arr[i].avg > arr[i].first) || (arr[i].avg > arr[i].second) || (arr[i].avg > arr[i].third) || (arr[i].avg > arr[i].four) || (arr[i].avg > arr[i].five)) {
+
+			printf("student number - %d)%3s\n", i + 1, arr[i].name);
+		}
+	}
+
+
+}
