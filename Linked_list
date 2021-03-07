@@ -1,0 +1,174 @@
+#pragma warning(disable:4996)
+#include<stdio.h>
+#include <string.h>
+#include<stdlib.h>
+#define N 11
+
+typedef struct node//Costumer struct
+{
+	char *first_name;
+	char *last_name;
+	char *birthday;
+	char *street;
+	int Hnumber;
+	char *town;
+	struct node* next;
+}persons;
+
+
+
+
+
+void ReadAndSort(FILE* f, persons* geTarr[])//function that read the list from the file and sort it by a-z
+{
+	persons** arr = geTarr;
+	char tmp[100];
+	char tmp1[100];
+	char tmp2[100];
+	char tmp3[100];
+	char tmp4[100];
+
+
+
+	int i, j;
+	while (!feof(f))
+	{
+		for (i = 0; i < N; i++)
+		{
+
+			fscanf(f, "%s", tmp);
+			char* first_name = (char*)malloc((strlen(tmp) + 1) * sizeof(char));
+			if (!first_name)
+				return 0;
+			strcpy(first_name, tmp);
+
+			fscanf(f, "%s", tmp1);
+			char* last_name = (char*)malloc((strlen(tmp1) + 1) * sizeof(char));
+			if (!last_name)
+				return 0;
+			strcpy(last_name, tmp1);
+
+			fscanf(f, "%s", tmp2);
+			char* birthday = (char*)malloc((strlen(tmp2) + 1) * sizeof(char));
+			if (!birthday)
+				return 0;
+			strcpy(birthday, tmp2);
+
+			fscanf(f, "%s", tmp3);
+			char* street = (char*)malloc((strlen(tmp3) + 1) * sizeof(char));
+			if (!street)
+				return 0;
+			strcpy(street, tmp3);
+			int Hnumber;
+			fscanf(f, "%d", &Hnumber);
+			fscanf(f, "%s", tmp4);
+			char* town = (char*)malloc((strlen(tmp4) + 1) * sizeof(char));
+			if (!town)
+				return 0;
+			strcpy(town, tmp4);
+			persons* tempPerson = (persons*)malloc(sizeof(persons));
+			tempPerson->first_name = first_name;
+			tempPerson->birthday = birthday;
+			tempPerson->last_name = last_name;
+			tempPerson->Hnumber = Hnumber;
+			tempPerson->street = street;
+			tempPerson->town = town;
+			int index = last_name[0] - 97;
+			if (arr[index] == NULL) {
+				arr[index] = tempPerson;
+			}
+			else {
+				tempPerson->next = arr[index];
+				arr[index] = tempPerson;
+			}
+		}
+
+		
+
+	}
+}
+
+void print_file(persons* arr[],int ind)//Function that print a name by his last name first character
+{
+	persons* current = arr[ind];
+	while(current!=NULL)
+	{
+		printf("first name is: %s,last name is: %s, \n", current->first_name, current->last_name);
+		current = current->next;
+	}
+	
+	
+
+
+}
+
+
+void main()
+
+{
+	persons* arr[26];// array of a-z
+
+	int i,input=1;
+	char ch;
+	persons* h;
+    h = NULL;//reset linked list
+	for(i=0;i<26;i++)//reset the array
+	{
+		arr[i] = NULL;
+	}
+	while (input)//menue
+	{
+		printf("Welcome to our costumers list\n");
+		printf("\n-----------------------------------\n");
+		printf("To load the costumers list from the file press 1\n");
+		printf("\n-----------------------------------\n");
+		printf("For fully costumers list press 2\n");
+		printf("\n-----------------------------------\n");
+		printf("For costumer list by last name press 3\n");
+		printf("\n-----------------------------------\n");
+		scanf("%d", &input);
+
+		
+		if(input==1)//In case we want to load the list from the file
+		{
+			FILE* f = fopen("PersonsDetails.txt", "r");
+			while (!f)
+			{
+				printf("Cant open the file\n");
+				FILE* f = fopen("PersonsDetails.txt", "r");
+
+			}
+
+			ReadAndSort(f, &arr);
+
+		}
+		if(input==2)//In case we want to see the list
+		{
+			for (i = 0; i < 26; i++)
+			{
+				if (arr[i] != NULL)
+				{
+					printf("%s\n", arr[i]->first_name);
+					printf("%s\n", arr[i]->last_name);
+					printf("%s\n", arr[i]->birthday);
+					printf("%s\n", arr[i]->street);
+					printf("%d\n", arr[i]->Hnumber);
+					printf("%s\n", arr[i]->town);
+					printf("\n----------------------\n");
+				}
+			}
+			
+
+		}
+		if(input==3)//In case we want to see a costumer by his last name
+		{
+			printf("Enter last name first character\n");
+			ch = getchar();
+			scanf("%c",&ch);
+			int send = ch - 'a';
+			printf("Costumers the there last name start with %c:\n", ch);
+			print_file(&arr, send);
+		}
+
+	}
+}
