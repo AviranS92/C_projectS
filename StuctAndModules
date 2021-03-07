@@ -1,10 +1,69 @@
-#pragma once
-typedef struct {
+#pragma warning(disable:4996)
+#define N 30
+#include"Student.h"
+#include"S_class.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string>
+
+void StudentsDetails(Students arr[])
+{
+	int i;
+	int count = 0;
+	for (i = 0;i < N;i++)
+	{
+		count = i;
+
+		printf("Enter name of student please:\n");
+		scanf("%s", &arr[i].name);
+		while (count)
+		{
+			if (!strcmp(arr[i].name, arr[i - count].name))
+			{
+				printf("We had a same name in our System please input another name\n");
+				scanf("%s", &arr[i].name);
+
+			}
+			count--;
+		}
+
+		do {
+			printf("Enter age of student please:\n");
+			scanf("%d",&arr[i].age);
+		} while (arr[i].age < 1 || arr[i].age>121);
+
+		do {
+			printf("Enter -FIVE- grades of student please:\n");
+			scanf("%d%d%d%d%d", &arr[i].first, &arr[i].second, &arr[i].third, &arr[i].four, &arr[i].five);
+		} while ((arr[i].first < 0 || arr[i].first>100) && (arr[i].second < 0 || arr[i].second>100) && (arr[i].third < 0 || arr[i].third>100) && (arr[i].four < 0 || arr[i].four>100) || (arr[i].five < 0 || arr[i].five>100));
+
+	}
+}
+void PrintByName(Students arr[])
+{
+	int i;
 	char name[20];
-	int age;
-	int first, second, third, four, five;
-	int avg;
-}Students;
-void StudentsDetails(Students arr[]);
-void PrintByName(Students arr[]);
-void AvgStudent(Students arr[]);
+	printf("what's name of student u select to see his details?\n");
+	scanf("%s", &name);
+	for (i = 0;i < N;i++) {
+		if (!strcmp(name, arr[i].name))
+		{
+			printf("Stundet number-%d)%3s%3d%3d%3d%3d%3d%3d\n", i + 1, arr[i].name, arr[i].age, arr[i].first, arr[i].second, arr[i].third, arr[i].four, arr[i].five);
+
+		}
+
+	}
+
+
+}
+
+void AvgStudent(Students arr[])
+{
+	int i;
+	for (i = 0;i < N;i++)
+	{
+		arr[i].avg = (arr[i].first + arr[i].second + arr[i].third + arr[i].four + arr[i].five) / 5;
+	}
+
+}
