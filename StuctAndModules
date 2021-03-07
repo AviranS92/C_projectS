@@ -1,0 +1,53 @@
+#pragma warning(disable:4996)
+#include"S_class.h"
+#include"Student.h"
+#define N 30
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+void main()
+{
+	int input;
+	int flag = 1;
+	Students arr[N];
+	while (flag)
+	{
+		printf("Hello Dear ,this is the main with any options:\n");
+		printf("---------------------\n");
+		printf("-> if u want to input a student details ,press 1.\n");
+		printf("---------------------\n");
+		printf("-> if u want to show a student details by name select ,press 2.\n");
+		printf("---------------------\n");
+		printf("-> if u want to show a students average ,press 3.\n");
+		printf("---------------------\n");
+		printf("-> if u want to show a student details ,press 4 (u need to input them before).\n");
+		printf("---------------------\n");
+		printf("-> if u want to show a students names who has grades average above any grade in his list ,press 5\n(u need to press 3 before)\n");
+		printf("---------------------\n");
+		printf("to exit from a program ,press 0\n");
+		printf("*****\n");
+		printf("what's u choose ,press here->");
+		scanf("%d", &input);
+		if (input == 0)
+			flag = 0;
+		if (input == 1)
+			StudentsDetails(&arr);
+		if (input == 2)
+			PrintByName(&arr);
+		if (input == 3)
+			AvgStudent(&arr);
+		if (input == 4)
+			PrintAllStudents(&arr);
+		if (input == 5)
+			PrintStudentsAvgAboveGrade(&arr);
+
+		    getchar();
+
+
+	}
+
+	getchar();
+
+
+}
